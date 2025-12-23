@@ -6,19 +6,12 @@ import axios from "../lib/axios.js";
 import { useEffect } from "react";
 
 const OrderSummary = () => {
-	const { total, subtotal, coupon, cart, removeCoupon, getMyCoupon } = useCartStore();
+	const { total, subtotal, coupon, cart, getMyCoupon, isCouponActive } = useCartStore();
 
-	const savings = subtotal - total;
+const savings = isCouponActive ? subtotal - total : 0;
 	const formattedSubtotal = subtotal.toFixed(2);
 	const formattedTotal = total.toFixed(2);
 	const formattedSavings = savings.toFixed(2);
-
-	useEffect(() => {
-		if (subtotal < 200 && coupon) {
-			removeCoupon();
-		}
-
-	}, [subtotal]);
 
 	useEffect(() => {
 		getMyCoupon();
@@ -53,18 +46,24 @@ const OrderSummary = () => {
 						<dd className='text-xl font-medium'>${formattedSubtotal}</dd>
 					</dl>
 
-					{savings > 0 && coupon && (
-						<dl className='flex items-center justify-between gap-4'>
-							<dt className='text-base font-normal'>Savings</dt>
-							<dd className='text-base font-medium text-emerald-400'>-${formattedSavings}</dd>
-						</dl>
+					{isCouponActive && savings > 0 && (
+					<dl className='flex items-center justify-between gap-4'>
+						<dt className='text-base font-normal'>Savings</dt>
+						<dd className='text-base font-medium text-emerald-400'>
+						-${savings.toFixed(2)}
+						</dd>
+					</dl>
 					)}
 
-					{coupon && (
-						<dl className='flex items-center justify-between gap-4'>
-							<dt className='text-base font-normal'>Coupon ({coupon.code})</dt>
-							<dd className='text-base font-medium text-emerald-400'>-{coupon.discountPercentage}%</dd>
-						</dl>
+					{isCouponActive && coupon && (
+					<dl className='flex items-center justify-between gap-4'>
+						<dt className='text-base font-normal'>
+						Coupon ({coupon.code})
+						</dt>
+						<dd className='text-base font-medium text-emerald-400'>
+						-{coupon.discountPercentage}%
+						</dd>
+					</dl>
 					)}
 					<dl className='flex items-center justify-between gap-4 border-t border-gray-600 pt-2'>
 						<dt className='text-base font-bold'>Total</dt>

@@ -14,7 +14,6 @@ export const validateCoupon = async (req, res) => {
 	try {
 		const { code, totalAmount } = req.body;
 
-		// ❌ mínimo $200
 		if (totalAmount < 200) {
 			return res.status(400).json({
 				message: "Coupon only applies to orders over $200",

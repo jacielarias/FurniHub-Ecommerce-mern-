@@ -4,7 +4,7 @@ import { useCartStore } from "../stores/useCartStore";
 
 const GiftCouponCard = () => {
 	const [userInputCode, setUserInputCode] = useState("");
-	const { coupon, subtotal, total, isCouponApplied, applyCoupon, getMyCoupon, removeCoupon } = useCartStore();
+	const { coupon, subtotal, isCouponApplied, applyCoupon, getMyCoupon, removeCoupon } = useCartStore();
 
 	useEffect(() => {
 		getMyCoupon();
