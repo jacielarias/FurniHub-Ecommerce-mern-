@@ -16,7 +16,6 @@ const slider = [
 	{ name: "Bed", imageUrl: "/furni_02.png" },
 ]
 
-
 const HomePage = () => {
 	const [currentIndex, setCurrentIndex] = useState(0);
 	const selectedImageSlide = slider[currentIndex].imageUrl;
