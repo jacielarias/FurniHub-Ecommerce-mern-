@@ -32,58 +32,60 @@ const UsersList = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
         >
-            <table className="min-w-full px-5">
-                <thead className="bg-gray-100 border-b">
-                    <tr>
-                        <th className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">ID</th>
-                        <th className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">UserName</th>
-                        <th className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">Email</th>
-                        <th className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">Role</th>
-                        <th className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">Actions</th>
-                    </tr>
-                </thead>
-                {users?.map((user) => (
-                    <tbody key={user._id} className="bg-white divide-y divide-gray-300">
-                        <tr className="hover:bg-gray-100 cursor-pointer">
-                            <td className="px-6 py-4 whitespace-nowrap">
-                                <div className="text-sm">{user._id}</div>
-                            </td>
-                            <td className="px-6 py-4 whitespace-nowrap">
-                                <div className="text-sm">{user.name}</div>
-                            </td>
-                            <td className="px-6 py-4 whitespace-nowrap">
-                                <div className="text-sm">{user.email}</div>
-                            </td>
-                            <td className="px-6 py-4 whitespace-nowrap">
-                                <div
-                                    className={`text-sm font-bold ${
-                                        user.role === "admin"
-                                            ? "text-emerald-400"
-                                            : user.role === "manager"
-                                            ? "text-blue-400"
-                                            : "text-gray-400"
-                                    }`}
-                                >
-                                    {user.role}
-                                </div>
-                            </td>
-                            <td className="px-4 py-4 whitespace-nowrap">
-                                <button
-                                    className={`p-3 text-sm ${
-                                        user._id === currentUser?._id || isManager
-                                            ? "bg-gray-400 cursor-not-allowed text-gray-300"
-                                            : "bg-emerald-600 hover:bg-emerald-400 text-white cursor-pointer"
-                                    }`}
-                                    onClick={() => user._id !== currentUser?._id && openModal(user)}
-                                    disabled={user._id === currentUser?._id || isManager}
-                                >
-                                    Change Role
-                                </button>
-                            </td>
+            <div className="overflow-x-auto">
+                <table className="min-w-full px-5">
+                    <thead className="bg-gray-100 border-b">
+                        <tr>
+                            <th className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">ID</th>
+                            <th className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">UserName</th>
+                            <th className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">Email</th>
+                            <th className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">Role</th>
+                            <th className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">Actions</th>
                         </tr>
-                    </tbody>
-                ))}
-            </table>
+                    </thead>
+                    {users?.map((user) => (
+                        <tbody key={user._id} className="bg-white divide-y divide-gray-300">
+                            <tr className="hover:bg-gray-100 cursor-pointer">
+                                <td className="px-6 py-4 whitespace-nowrap" title={user._id}>
+                                    <div className="text-sm max-w-[250px] truncate">{user._id}</div>
+                                </td>
+                                <td className="px-6 py-4 whitespace-nowrap">
+                                    <div className="text-sm max-w-[160px] truncate">{user.name}</div>
+                                </td>
+                                <td className="px-6 py-4 whitespace-nowrap" title={user.email}>
+                                    <div className="text-sm max-w-[220px] truncate">{user.email}</div>
+                                </td>
+                                <td className="px-6 py-4 whitespace-nowrap">
+                                    <div
+                                        className={`text-sm font-bold max-w-[100px] truncate ${
+                                            user.role === "admin"
+                                                ? "text-emerald-400"
+                                                : user.role === "manager"
+                                                ? "text-blue-400"
+                                                : "text-gray-400"
+                                        }`}
+                                    >
+                                        {user.role}
+                                    </div>
+                                </td>
+                                <td className="px-4 py-4 whitespace-nowrap">
+                                    <button
+                                        className={`p-3 text-sm ${
+                                            user._id === currentUser?._id || isManager
+                                                ? "bg-gray-400 cursor-not-allowed text-gray-300"
+                                                : "bg-emerald-600 hover:bg-emerald-400 text-white cursor-pointer"
+                                        }`}
+                                        onClick={() => user._id !== currentUser?._id && openModal(user)}
+                                        disabled={user._id === currentUser?._id || isManager}
+                                    >
+                                        Change Role
+                                    </button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    ))}
+                </table>
+            </div>
 
             {/* Modal */}
             {isModalOpen && (

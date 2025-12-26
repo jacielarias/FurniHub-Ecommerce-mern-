@@ -28,7 +28,7 @@ const Navbar = () => {
 	const { cart } = useCartStore();
 
 	return (
-		<header className={`fixed top-0 left-0 w-full h-32 bg-opacity-90 z-40 transition-all duration-300 border-b flex items-center ${isSticky 
+		<header className={`fixed top-0 left-0 w-full h-32 bg-opacity-90 z-30 transition-all duration-300 border-b flex items-center ${isSticky 
         ? "bg-[rgba(255,255,255,0.8)] border-custom-light-secundary text-custom-text-dark backdrop-blur-sm" 
         : "text-white"}`}>
 			<div className={`container m-auto h-full ${isAdminOrManager ? "pl-32" : "px-32"}`}>
