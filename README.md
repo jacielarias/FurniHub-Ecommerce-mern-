@@ -1,7 +1,12 @@
 ## Demo
 
-> Note: Best viewed on **desktop**. Responsive not added yet / Nota: Se recomienda ver en **computadora**. Responsive aún no agregado.
+> ⚠️ **Note:** Best viewed on **desktop**. Responsive design is not implemented yet.  
+> ⚠️ **Nota:** Se recomienda ver en **computadora**. El diseño responsive aún no está implementado.
 
-For having access to the admin dashboard:
+### 🔐 Admin Demo Access / Acceso de demostración al panel de administrador
+- **Email:** test123@gmail.com  
+- **Password:** test12345  
+*(Demo credentials only)*
 
-🌐 [Visit FurniHub](https://furnihub-ecommerce-mern.onrender.com/)  
+🌐 **Live Demo:**  
+👉 https://furnihub-ecommerce-mern.onrender.com/
