@@ -44,4 +44,4 @@ export const useAdminStore = create((set) => ({
         }
     }
 
-}))
+}));

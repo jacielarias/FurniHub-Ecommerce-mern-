@@ -23,6 +23,8 @@ const UsersList = () => {
         setSelectedRole("");
     };
 
+    const isSubAdmin = currentUser?.role === "manager";
+
     return (
         <motion.div
             className="bg-white text-[#444] shadow-lg overflow-hidden max-w-4xl mx-auto"
@@ -30,7 +32,7 @@ const UsersList = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
         >
-            <table className="min-w-full">
+            <table className="min-w-full px-5">
                 <thead className="bg-gray-100 border-b">
                     <tr>
                         <th className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">ID</th>
@@ -53,20 +55,30 @@ const UsersList = () => {
                                 <div className="text-sm">{user.email}</div>
                             </td>
                             <td className="px-6 py-4 whitespace-nowrap">
-                                <div className={`text-sm ${user.role === "admin" ? "font-extrabold text-emerald-400" : "" }`}>{user.role}</div>
+                                <div
+                                    className={`text-sm font-bold ${
+                                        user.role === "admin"
+                                            ? "text-emerald-400"
+                                            : user.role === "manager"
+                                            ? "text-blue-400"
+                                            : "text-gray-400"
+                                    }`}
+                                >
+                                    {user.role}
+                                </div>
                             </td>
-                            <td className="px-6 py-4 whitespace-nowrap">
-							<button
-								className={`px-4 py-4 text-sm ${
-									user._id === currentUser?._id
-										? "bg-gray-400 cursor-not-allowed text-gray-300"
-										: "bg-emerald-600 hover:bg-emerald-400 text-white cursor-pointer"
-								}`}
-								onClick={() => user._id !== currentUser?._id && openModal(user)}
-								disabled={user._id === currentUser?._id}
-							>
-								Change Role
-							</button>
+                            <td className="px-4 py-4 whitespace-nowrap">
+                                <button
+                                    className={`p-3 text-sm ${
+                                        user._id === currentUser?._id || isSubAdmin
+                                            ? "bg-gray-400 cursor-not-allowed text-gray-300"
+                                            : "bg-emerald-600 hover:bg-emerald-400 text-white cursor-pointer"
+                                    }`}
+                                    onClick={() => user._id !== currentUser?._id && openModal(user)}
+                                    disabled={user._id === currentUser?._id || isSubAdmin}
+                                >
+                                    Change Role
+                                </button>
                             </td>
                         </tr>
                     </tbody>
@@ -87,6 +99,7 @@ const UsersList = () => {
                             onChange={(e) => setSelectedRole(e.target.value)}
                         >
                             <option value="customer">Customer</option>
+                            <option value="manager">Manager</option>
                             <option value="admin">Admin</option>
                         </select>
 

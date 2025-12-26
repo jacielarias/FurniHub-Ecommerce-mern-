@@ -157,12 +157,15 @@ const ProductsList = () => {
 								</button>
 							</td>
 							<td className='px-6 py-4 whitespace-nowrap text-sm font-medium'>
-								<button onClick={() => handleOpenModal(product)} className="text-[#666] hover:text-green-300 cursor-pointer">
-									<Pencil className='h-5 w-5 mr-2' />
+								<button 
+									onClick={() => handleOpenModal(product)} 
+									className="text-[#666] hover:text-green-400 cursor-pointer shadow-lg border border-[#e3e3e3] p-3 rounded-full hover:shadow-none mr-2"
+								>
+									<Pencil className='h-5 w-5' />
 								</button>
 								<button
 									onClick={() => deleteProduct(product._id)}
-									className='text-[#666] hover:text-red-300 cursor-pointer'
+									className='text-[#666] hover:text-red-600 cursor-pointer shadow-lg border border-[#e3e3e3] p-3 rounded-full hover:shadow-none'
 								>
 									<Trash className='h-5 w-5' />
 								</button>

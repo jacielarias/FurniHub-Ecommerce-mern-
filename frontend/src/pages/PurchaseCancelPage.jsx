@@ -1,8 +1,33 @@
 import { XCircle, ArrowLeft } from "lucide-react";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
+import axios from "../lib/axios";
+import { useEffect, useState } from "react";
 
 const PurchaseCancelPage = () => {
+	const [error, setError] = useState(null);
+
+	useEffect(() => {
+		const handleCancelPayment = async (sessionId) => {			
+			try {
+				await axios.post("payment/purchase-cancel", {
+				sessionId,
+				})
+			} catch (error) {
+				console.log(error)
+			}
+		}
+
+		const sessionId = new URLSearchParams(window.location.search).get("session_id");
+		if (sessionId) {
+			handleCancelPayment(sessionId);
+		} else {
+			setError("No session ID found in the URL");
+		}
+	})
+
+	if (error) return `Error: ${error}`;
+	
 	return (
 		<div className='min-h-screen flex items-center justify-center px-4 text-[#444]'>
 			<motion.div

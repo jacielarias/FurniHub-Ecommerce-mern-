@@ -10,6 +10,7 @@ import couponRoutes from "./routes/coupon.route.js";
 import paymentRoutes from "./routes/payment.route.js";
 import analyticsRoutes from "./routes/analytics.route.js";
 import userRoutes from "./routes/user.route.js";
+import orderRoutes from "./routes/order.route.js"
 
 import { connectDB } from "./lib/db.js";
 
@@ -31,6 +32,7 @@ app.use("/api/cart", cartRoutes);
 app.use("/api/coupons", couponRoutes);
 app.use("/api/payments", paymentRoutes);
 app.use("/api/analytics", analyticsRoutes);
+app.use("/api/orders", orderRoutes);
 
 // Servir frontend en producción
 if (process.env.NODE_ENV === "production") {

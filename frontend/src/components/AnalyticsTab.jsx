@@ -31,7 +31,7 @@ const AnalyticsTab = () => {
 	}, []);
 
 	if (isLoading) {
-		return <div>Loading...</div>;
+		return <div className="w-full text-center">Loading...</div>;
 	}
 
 	return (

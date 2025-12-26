@@ -19,14 +19,20 @@ export const changeUserRole =  async (req, res) => {
             return res.status(400).json({ message: "Role is required" });
         }
 
-        if(role !== "customer" && role !== "admin"){
+        if(req.user.role !== "admin"){
+            return res.status(403).json({
+                message: "You do not have sufficient permissions to perform this action",
+            });
+        }
+
+        if(role !== "customer" && role !== "admin" && role !== "manager"){
             return res.status(404).json({ message: "User role not valid" })
         }
 
         if (req.user._id === req.params.id) {
             return res.status(400).json({ message: "Cannot change your own role" });
         }
-
+        
         const user = await User.findById(req.params.id)
 
         if(!user){

@@ -58,7 +58,7 @@ export const createCheckoutSession = async (req, res) => {
 			line_items: lineItems,
 			mode: "payment",
 			success_url: `${process.env.CLIENT_URL}/purchase-success?session_id={CHECKOUT_SESSION_ID}`,
-			cancel_url: `${process.env.CLIENT_URL}/purchase-cancel`,
+			cancel_url: `${process.env.CLIENT_URL}/purchase-cancel?session_id={CHECKOUT_SESSION_ID}`,
 			discounts: isCouponValid ? [{
 					coupon: await createStripeCoupon(
 						coupon.discountPercentage
@@ -87,6 +87,7 @@ export const createCheckoutSession = async (req, res) => {
 			})),
 			status: "pending",
 			paymentStatus: "pending",
+			statusHistory: [{ status: "pending" }],
 			totalAmount: session.amount_total / 100,
 			stripeSessionId: session.id,
 		});
@@ -95,7 +96,7 @@ export const createCheckoutSession = async (req, res) => {
 
 		if (subtotalAmount >= 20000) {
 			await createNewCoupon(req.user._id);
-		}
+		};
 
 		res.status(200).json({
 			url: session.url,
@@ -112,6 +113,51 @@ export const createCheckoutSession = async (req, res) => {
 	}
 };
 
+export const checkOutCancelled = async (req, res) => {
+	try {
+		const { sessionId } = req.body;
+
+		const session = await stripe.checkout.sessions.retrieve(sessionId);
+
+		const order = await Order.findOne({ 
+			stripeSessionId: session.id,
+		})
+
+		if (!order) {
+			return res.status(404).json({
+				message: "Order not found for this session",
+			});
+		};
+
+		if (session.payment_status === "unpaid" && ["open", "expired"].includes(session.status)) {
+			order.status = "cancelled";
+			order.paymentStatus = "cancelled";
+
+			const alreadyCancelled = order.statusHistory.some(
+				s => s.status === "cancelled"
+			);
+
+			if (!alreadyCancelled) {
+				order.statusHistory.push({ status: "cancelled" });
+			}
+		}
+
+		await order.save();
+
+		res.status(200).json({
+			success: true,
+			message: "Payment was cancelled",
+			orderId: order._id
+		})
+	} catch (error) {
+		console.error("Error when cancelling payment:", error);
+		res.status(500).json({
+			message: "Error when cancelling payment",
+			error: error.message,
+		});
+	}
+}
+
 export const checkoutSuccess = async (req, res) => {
 	try {
 		const { sessionId } = req.body;
@@ -120,10 +166,21 @@ export const checkoutSuccess = async (req, res) => {
 		const order = await Order.findOne({
 			stripeSessionId: session.id,
 		});
-
+		
+		if (!order) {
+			console.log("Order not found for session:", session.id);
+			return res.status(404).json({ message: "Order not found" });
+		}
+		
 		if (session.payment_status === "paid") {
 			order.status = "paid";
 			order.paymentStatus = "paid"
+
+			const alreadyPaid = order.statusHistory.some(s => s.status === "paid")
+
+			if(!alreadyPaid){
+				order.statusHistory.push({ status: "paid" });
+			};
 
 			if (session.metadata.couponCode) {
 				await Coupon.findOneAndUpdate(
@@ -134,7 +191,6 @@ export const checkoutSuccess = async (req, res) => {
 					{ isActive: false }
 				);
 			}
-
 			await order.save();
 
 			await User.updateOne(
