@@ -33,7 +33,7 @@ function App() {
 
 	if (checkingAuth) return <LoadingSpinner />;
 
-	const isAdminOrSubAdmin = user?.role === "admin" || user?.role === "manager";
+	const isAdminOrSubAdmin = user?.role === "admin" || user?.role === "sub-admin";
 
 	return (
 		<div className='min-h-screen text-white relative overflow-hidden'>

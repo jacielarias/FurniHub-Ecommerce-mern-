@@ -5,13 +5,13 @@ import { protectRoute, requireRole } from "../middleware/auth.middleware.js";
 const router = express.Router();
 
 // Routes
-router.get("/", protectRoute, requireRole("admin", "manager"), getAllProducts);
+router.get("/", protectRoute, requireRole("admin", "sub-admin"), getAllProducts);
 router.get("/featured", getFeaturedProducts);
 router.get("/category/:category", getProductsByCategory);
 router.get("/recommendations", getRecommendedProducts);
-router.post("/", protectRoute, requireRole("admin", "manager"), createProduct);
-router.put("/:id", protectRoute, requireRole("admin", "manager"), editProduct)
-router.patch("/:id", protectRoute, requireRole("admin", "manager"), toggleFeaturedProduct);
-router.delete("/:id", protectRoute, requireRole("admin", "manager"), deleteProduct);
+router.post("/", protectRoute, requireRole("admin", "sub-admin"), createProduct);
+router.put("/:id", protectRoute, requireRole("admin", "sub-admin"), editProduct)
+router.patch("/:id", protectRoute, requireRole("admin", "sub-admin"), toggleFeaturedProduct);
+router.delete("/:id", protectRoute, requireRole("admin", "sub-admin"), deleteProduct);
 
 export default router;

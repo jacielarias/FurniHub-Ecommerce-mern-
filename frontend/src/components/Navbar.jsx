@@ -24,7 +24,7 @@ const Navbar = () => {
 
 
 	const { user, logout } = useUserStore();
-	const isAdminOrSubAdmin = user?.role === "admin" || user?.role === "manager";
+	const isAdminOrSubAdmin = user?.role === "admin" || user?.role === "sub-admin";
 	const { cart } = useCartStore();
 
 	return (

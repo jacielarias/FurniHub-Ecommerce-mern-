@@ -23,7 +23,7 @@ const UsersList = () => {
         setSelectedRole("");
     };
 
-    const isSubAdmin = currentUser?.role === "manager";
+    const isSubAdmin = currentUser?.role === "sub-admin";
 
     return (
         <motion.div
@@ -59,7 +59,7 @@ const UsersList = () => {
                                     className={`text-sm font-bold ${
                                         user.role === "admin"
                                             ? "text-emerald-400"
-                                            : user.role === "manager"
+                                            : user.role === "sub-admin"
                                             ? "text-blue-400"
                                             : "text-gray-400"
                                     }`}
@@ -99,7 +99,7 @@ const UsersList = () => {
                             onChange={(e) => setSelectedRole(e.target.value)}
                         >
                             <option value="customer">Customer</option>
-                            <option value="manager">Manager</option>
+                            <option value="sub-admin">Sub-Admin</option>
                             <option value="admin">Admin</option>
                         </select>
 
