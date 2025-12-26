@@ -33,7 +33,7 @@ function App() {
 
 	if (checkingAuth) return <LoadingSpinner />;
 
-	const isAdminOrSubAdmin = user?.role === "admin" || user?.role === "sub-admin";
+	const isAdminOrManager = user?.role === "admin" || user?.role === "manager";
 
 	return (
 		<div className='min-h-screen text-white relative overflow-hidden'>
@@ -46,7 +46,7 @@ function App() {
 					<Route path='/login' element={!user ? <LoginPage /> : <Navigate to='/' />} />
 					<Route
 						path='/secret-dashboard'
-						element={isAdminOrSubAdmin ? <AdminPage /> : <Navigate to='/login' />}
+						element={isAdminOrManager ? <AdminPage /> : <Navigate to='/login' />}
 					/>
 					<Route path='/category/:category' element={<CategoryPage />} />
 					<Route path='/cart' element={user ? <CartPage /> : <Navigate to='/login' />} />

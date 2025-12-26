@@ -4,7 +4,7 @@ import { getAnalyticsData, getDailySalesData } from "../controllers/analytics.co
 
 const router = express.Router();
 
-router.get("/", protectRoute, requireRole("admin", "sub-admin"), async (req, res) => {
+router.get("/", protectRoute, requireRole("admin", "manager"), async (req, res) => {
 	try {
 		const analyticsData = await getAnalyticsData();
 

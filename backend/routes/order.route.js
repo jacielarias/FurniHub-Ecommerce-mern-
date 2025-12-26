@@ -6,6 +6,6 @@ const router = express.Router();
 
 // Routes
 router.get("/", protectRoute, getAllOrders);
-router.put("/:id", protectRoute, requireRole("admin", "sub-admin"), changeOrderStatus);  
+router.put("/:id", protectRoute, requireRole("admin", "manager"), changeOrderStatus);  
 
 export default router;

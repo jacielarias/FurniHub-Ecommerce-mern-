@@ -25,7 +25,7 @@ export const changeUserRole =  async (req, res) => {
             });
         }
 
-        if(role !== "customer" && role !== "admin" && role !== "sub-admin"){
+        if(role !== "customer" && role !== "admin" && role !== "manager"){
             return res.status(404).json({ message: "User role not valid" })
         }
 

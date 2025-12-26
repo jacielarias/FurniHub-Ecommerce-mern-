@@ -24,14 +24,14 @@ const Navbar = () => {
 
 
 	const { user, logout } = useUserStore();
-	const isAdminOrSubAdmin = user?.role === "admin" || user?.role === "sub-admin";
+	const isAdminOrManager = user?.role === "admin" || user?.role === "manager";
 	const { cart } = useCartStore();
 
 	return (
 		<header className={`fixed top-0 left-0 w-full h-32 bg-opacity-90 z-40 transition-all duration-300 border-b flex items-center ${isSticky 
         ? "bg-[rgba(255,255,255,0.8)] border-custom-light-secundary text-custom-text-dark backdrop-blur-sm" 
         : "text-white"}`}>
-			<div className={`container m-auto h-full ${isAdminOrSubAdmin ? "pl-32" : "px-32"}`}>
+			<div className={`container m-auto h-full ${isAdminOrManager ? "pl-32" : "px-32"}`}>
 				<div className='flex items-center h-full'>
 					<nav className='flex justify-between items-center gap-4 w-full h-full'>
 						<Link to='/' className='text-4xl font-bold text-[#444] items-center space-x-2 flex'>
@@ -102,7 +102,7 @@ const Navbar = () => {
 									</Link>
 								</>
 							)}
-							{isAdminOrSubAdmin && (
+							{isAdminOrManager && (
 								<Link
 									className='bg-emerald-700 hover:bg-emerald-600 text-white px-4 h-full font-medium
 									transition duration-300 ease-in-out flex items-center flex-col justify-center'

@@ -5,7 +5,7 @@ import { protectRoute, requireRole } from "../middleware/auth.middleware.js";
 const router = express.Router();
 
 // Routes
-router.get("/", protectRoute, requireRole("admin", "sub-admin"), getAllProducts);
+router.get("/", protectRoute, requireRole("admin", "manager"), getAllProducts);
 router.get("/featured", getFeaturedProducts);
 router.get("/category/:category", getProductsByCategory);
 router.get("/recommendations", getRecommendedProducts);

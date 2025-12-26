@@ -23,7 +23,7 @@ const UsersList = () => {
         setSelectedRole("");
     };
 
-    const isSubAdmin = currentUser?.role === "sub-admin";
+    const isManager = currentUser?.role === "manager";
 
     return (
         <motion.div
@@ -59,7 +59,7 @@ const UsersList = () => {
                                     className={`text-sm font-bold ${
                                         user.role === "admin"
                                             ? "text-emerald-400"
-                                            : user.role === "sub-admin"
+                                            : user.role === "manager"
                                             ? "text-blue-400"
                                             : "text-gray-400"
                                     }`}
@@ -70,12 +70,12 @@ const UsersList = () => {
                             <td className="px-4 py-4 whitespace-nowrap">
                                 <button
                                     className={`p-3 text-sm ${
-                                        user._id === currentUser?._id || isSubAdmin
+                                        user._id === currentUser?._id || isManager
                                             ? "bg-gray-400 cursor-not-allowed text-gray-300"
                                             : "bg-emerald-600 hover:bg-emerald-400 text-white cursor-pointer"
                                     }`}
                                     onClick={() => user._id !== currentUser?._id && openModal(user)}
-                                    disabled={user._id === currentUser?._id || isSubAdmin}
+                                    disabled={user._id === currentUser?._id || isManager}
                                 >
                                     Change Role
                                 </button>
@@ -99,7 +99,7 @@ const UsersList = () => {
                             onChange={(e) => setSelectedRole(e.target.value)}
                         >
                             <option value="customer">Customer</option>
-                            <option value="sub-admin">Sub-Admin</option>
+                            <option value="manager">Manager</option>
                             <option value="admin">Admin</option>
                         </select>
 
