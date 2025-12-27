@@ -1,6 +1,5 @@
 ## Demo
 
-> ⚠️ **Note:** Best viewed on **desktop**. Responsive design is not implemented yet.  
 > ⚠️ **Nota:** Se recomienda ver en **computadora**. El diseño responsive aún no está implementado.
 
 ### 🔐 Admin Demo Access / Acceso de demostración al panel de administrador
