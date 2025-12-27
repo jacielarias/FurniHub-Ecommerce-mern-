@@ -35,7 +35,7 @@ const AnalyticsTab = () => {
 	}
 
 	return (
-		<div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-[#444]'>
+		<div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-[#444] '>
 			<div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-8'>
 				<AnalyticsCard
 					title='Total Users'
@@ -63,37 +63,39 @@ const AnalyticsTab = () => {
 				/>
 			</div>
 			<motion.div
-				className='bg-gray-white p-6 shadow-lg text-[#444]'
-				initial={{ opacity: 0, y: 20 }}
-				animate={{ opacity: 1, y: 0 }}
-				transition={{ duration: 0.5, delay: 0.25 }}
-			>
-				<ResponsiveContainer width='100%' height={400} className={"text-[#444]"}>
-					<LineChart data={dailySalesData}>
-						<CartesianGrid strokeDasharray='3 3' />
-						<XAxis dataKey='date' stroke='#E02B66' />
-						<YAxis yAxisId='left' stroke='#E02B66' />
-						<YAxis yAxisId='right' orientation='right' stroke='#E02B66' />
+					className="bg-gray-50 p-6 shadow-lg text-[#444] overflow-x-auto"
+					initial={{ opacity: 0, y: 20 }}
+					animate={{ opacity: 1, y: 0 }}
+					transition={{ duration: 0.5, delay: 0.25 }}
+				>
+					<div className="min-w-[600px]">
+					<ResponsiveContainer width="100%" height={400}>
+						<LineChart data={dailySalesData}>
+						<CartesianGrid strokeDasharray="3 3" />
+						<XAxis dataKey="date" stroke="#E02B66" />
+						<YAxis yAxisId="left" stroke="#E02B66" />
+						<YAxis yAxisId="right" orientation="right" stroke="#E02B66" />
 						<Tooltip />
 						<Legend />
 						<Line
-							yAxisId='left'
-							type='monotone'
-							dataKey='sales'
-							stroke='#2F67EB'
+							yAxisId="left"
+							type="monotone"
+							dataKey="sales"
+							stroke="#2F67EB"
 							activeDot={{ r: 8 }}
-							name='Sales'
+							name="Sales"
 						/>
 						<Line
-							yAxisId='right'
-							type='monotone'
-							dataKey='revenue'
-							stroke='#B31E6D'
+							yAxisId="right"
+							type="monotone"
+							dataKey="revenue"
+							stroke="#B31E6D"
 							activeDot={{ r: 8 }}
-							name='Revenue'
+							name="Revenue"
 						/>
-					</LineChart>
-				</ResponsiveContainer>
+						</LineChart>
+					</ResponsiveContainer>
+					</div>
 			</motion.div>
 		</div>
 	);

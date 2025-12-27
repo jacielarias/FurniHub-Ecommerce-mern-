@@ -191,11 +191,11 @@ const Navbar = () => {
 
 								{isAdminOrManager && (
 									<Link
-										className='bg-emerald-700 hover:bg-emerald-600 text-white px-4 h-28 w-full font-medium transition duration-300 ease-in-out flex items-center flex-col justify-center absolute left-0 bottom-0'
+										className='bg-emerald-700 hover:bg-emerald-600 text-white px-4 h-28 w-full font-medium transition duration-300 ease-in-out flex items-center flex-col justify-center absolute left-0 bottom-0 gap-4 lg:gap-2'
 										to={"/secret-dashboard"}
 									>
-										<Lock className='inline-block mb-2' size={18} />
-										<span className='hidden sm:inline'>Dashboard</span>
+										<Lock className='inline-block' size={18} />
+										<span className='sm:inline'>Dashboard</span>
 									</Link>
 								)}
 							</div>

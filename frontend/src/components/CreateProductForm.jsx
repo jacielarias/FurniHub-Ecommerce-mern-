@@ -53,7 +53,7 @@ const CreateProductForm = () => {
 
 	return (
 		<motion.div
-			className='bg-white p-14 w-175 mb-8 mx-auto text-[#444]'
+			className='bg-white p-7 lg:p-14 w-full lg:w-175 mb-8 mx-auto text-[#444]'
 			initial={{ opacity: 0, y: 20 }}
 			animate={{ opacity: 1, y: 0 }}
 			transition={{ duration: 0.8 }}

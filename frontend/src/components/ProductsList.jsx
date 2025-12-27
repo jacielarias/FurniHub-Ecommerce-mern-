@@ -37,6 +37,21 @@ const ProductsList = () => {
 	};
 
 	useEffect(() => {
+		if (openModal) {
+			// Bloquea el scroll del body
+			document.body.style.overflow = "hidden";
+		} else {
+			// Restaura el scroll
+			document.body.style.overflow = "";
+		}
+
+		// Limpieza por si el componente se desmonta
+		return () => {
+			document.body.style.overflow = "";
+		};
+	}, [openModal]);
+
+	useEffect(() => {
 		if (selectedProduct) {
 			setNewProduct({
 				name: selectedProduct.name,
@@ -87,6 +102,7 @@ const ProductsList = () => {
 			animate={{ opacity: 1, y: 0 }}
 			transition={{ duration: 0.8 }}
 		>
+			<div className="overflow-x-auto">
 			<table className=' min-w-full '>
 				<thead className='bg-gray-100 border-b'>
 					<tr>
@@ -175,17 +191,17 @@ const ProductsList = () => {
 					))}
 				</tbody>
 			</table>
+			</div>
 			{ openModal && createPortal(
 				
 				<div className={`w-full h-lvh bg-[rgba(0,0,0,0.4)] backdrop-blur-md fixed inset-0 z-[9999] flex justify-center items-center`}>
-						<button onClick={handleCloseModal} className="text-white absolute top-[8%] right-20 cursor-pointer">
-							<X className='h-10 w-10 mr-2' />
-						</button>
 					<div>
 					
-					<form className='space-y-4 bg-white text-[#666] shadow-lg p-8 w-[450px] max-w-xl mx-auto' onSubmit={handleUpdateProduct}>
+					<form className='space-y-4 relative bg-white text-[#666] shadow-lg p-8 h-[95vh] w-full lg:w-[450px] max-w-xl mx-auto overflow-auto' onSubmit={handleUpdateProduct}>
 					<h2 className='text-2xl font-semibold mb-6 text-emerald-500'>Edit Product</h2>
-
+					<button className="bg-red-500 hover:bg-red-600 cursor-pointer text-white w-[50px] h-[50px] py-4 lg:hidden flex justify-center items-center absolute top-0 right-0" onClick={handleCloseModal}>
+						<X />
+					</button>
 					<div>
 						<label htmlFor='name' className='block text-sm font-medium text-gray-400'>
 							Product Name
@@ -289,7 +305,7 @@ const ProductsList = () => {
 									Update Product
 								</>
 							)}
-						</button>
+					</button>
 					</form>
 					</div>
 				</div>,
