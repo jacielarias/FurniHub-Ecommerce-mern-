@@ -31,13 +31,13 @@ const FeaturedProducts = ({ featuredProducts }) => {
 	const isEndDisabled = currentIndex >= featuredProducts.length - itemsPerPage;
 
 	return (
-		<div className='py-12'>
+		<div className='py-12 lg:mt-0  mt-20'>
 			<div className='container mx-auto px-4'>
 				<h2 className='text-center text-5xl sm:text-6xl font-bold text-emerald-400 mb-4'>Featured</h2>
 				<div className='relative border'>
 					<div className='overflow-hidden border'>
 						<div
-							className='flex transition-transform gap-2 duration-300 ease-in-out'
+							className='flex justify-center items-center transition-transform gap-2 duration-300 ease-in-out'
 						>
 							{featuredProducts
 							?.slice(currentIndex, currentIndex + itemsPerPage)

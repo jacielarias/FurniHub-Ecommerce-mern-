@@ -28,12 +28,12 @@ const LoginPage = () => {
 			</motion.div>
 
 			<motion.div
-				className='mt-8 sm:mx-auto sm:w-full sm:max-w-md'
+				className='mt-8 sm:mx-auto w-[75%] sm:max-w-md'
 				initial={{ opacity: 0, y: 20 }}
 				animate={{ opacity: 1, y: 0 }}
 				transition={{ duration: 0.8, delay: 0.2 }}
 			>
-				<div className='bg-white py-8 px-4 shadow sm:px-10'>
+				<div className='bg-white py-8 px-5 shadow sm:px-10'>
 					<form onSubmit={handleSubmit} className='space-y-6 '>
 						<div>
 							<label htmlFor='email' className='block text-sm font-medium'>
@@ -49,8 +49,7 @@ const LoginPage = () => {
 									required
 									value={email}
 									onChange={(e) => setEmail(e.target.value)}
-									className=' block w-full px-3 py-4 pl-10
-									 
+									className='block w-full px-3 py-4 pl-10
 									 placeholder-gray-400 focus:outline-none focus:ring-emerald-500 
 									 focus:border-emerald-500 sm:text-sm'
 									placeholder='you@example.com'
@@ -72,7 +71,7 @@ const LoginPage = () => {
 									required
 									value={password}
 									onChange={(e) => setPassword(e.target.value)}
-									className='block w-full px-3 py-4 pl-10   placeholder-gray-200 focus:outline-none focus:ring-emerald-500 focus:border-emerald-500 sm:text-sm'
+									className='block w-full px-3 py-4 pl-10 placeholder-gray-200 focus:outline-none focus:ring-emerald-500 focus:border-emerald-500 sm:text-sm'
 									placeholder='••••••••'
 								/>
 							</div>

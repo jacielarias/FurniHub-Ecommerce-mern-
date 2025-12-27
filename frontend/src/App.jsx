@@ -36,7 +36,7 @@ function App() {
 	const isAdminOrManager = user?.role === "admin" || user?.role === "manager";
 
 	return (
-		<div className='min-h-screen text-white relative overflow-hidden'>
+		<div className='min-h-screen text-white relative'>
 
 			<div className='z-50 relative'>
 				<Navbar />

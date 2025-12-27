@@ -17,7 +17,7 @@ const CategoryItem = ({ category }) => {
 					</div>
 
 					{/* Texto FUERA de la imagen */}
-					<div className="p-4 h-80">
+					<div className="p-4 h-20 lg:h-80">
 						<h3 className="text-[#444] text-2xl font-bold mb-1">
 							{category.name}
 						</h3>
